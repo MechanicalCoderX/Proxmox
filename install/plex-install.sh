@@ -13,6 +13,8 @@ setting_up_container
 network_check
 update_os
 
+timedatectl set-timezone 'America/Chicago'
+
 msg_info "Installing Dependencies"
 $STD apt-get install -y curl
 $STD apt-get install -y sudo
