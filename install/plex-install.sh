@@ -22,17 +22,10 @@ msg_ok "Installed Dependencies"
 
 if [[ -z "$(grep -w "100000" /proc/self/uid_map)" ]]; then
   msg_info "Setting Up Hardware Acceleration"
-  $STD apt-get -y install \
-    va-driver-all \
-    ocl-icd-libopencl1 
-  if [[ ${PCT_OSVERSION} == "20.04" ]]; then 
-  $STD apt-get install -y beignet-opencl-icd
-  else
-  $STD apt-get install -y intel-opencl-icd
-  fi
-  /bin/chgrp video /dev/dri
-  /bin/chmod 755 /dev/dri
-  /bin/chmod 660 /dev/dri/*
+  $STD wget -P /tmp/ https://us.download.nvidia.com/XFree86/Linux-x86_64/530.41.03/NVIDIA-Linux-x86_64-530.41.03.run
+  $STD chmod +x /tmp/NVIDIA-Linux-x86_64-530.41.03.run
+  $STD /tmp/NVIDIA-Linux-x86_64-530.41.03.run --check
+  $STD /tmp/NVIDIA-Linux-x86_64-530.41.03.run --no-kernel-module --silent
   msg_ok "Set Up Hardware Acceleration"
 fi
 
